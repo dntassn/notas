@@ -1,0 +1,14 @@
+#{extends 'main.html' /}
+#{set title:'Detalhamento de pasta' /}
+
+<div class="card mt-3">
+  <div class="card-header">
+    #{get 'title' /}: #${pasta.id}
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">${pasta.nome}</h5>
+    <p class="card-text">${pessoa.email}</p>
+	<a href="@{Pastas.editar(pasta.id)}" class="btn btn-primary">Editar</a>
+	<a href="@{Pastas.remover(pasta.id)}" class="btn btn-primary">Remover</a>
+  </div>
+</div>

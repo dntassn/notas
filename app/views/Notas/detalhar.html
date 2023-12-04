@@ -1,0 +1,50 @@
+#{extends 'main.html' /}
+<style>
+  a{
+    text-decoration: none;
+  }
+  .nota{
+    text-align: justify;
+  }
+</style>
+
+<div class="container mt-3">
+
+<a href="@{Notas.listar()}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+</svg></a>
+
+#{if x}
+<a href="@{Notas.publico(nota.id)}">
+  <span class="ms-1 badge bg-primary rounded-pill nomePasta">${nota.visualizacao}</span>
+
+</a>
+#{if nota.pasta?.id}
+<a  class="ms-2" href="@{Pastas.editar(nota.pasta?.id)}">Editar pasta</a>
+#{/if}
+
+
+<br>
+<div class="mt-3">
+  <a class="me-1" href="@{Notas.deletar(nota.id)}">Apagar</a>
+<a href="@{Notas.editar(nota.id)}">Editar</a>
+
+</div>
+#{/if}
+
+
+
+
+
+
+<div class="bd-example-snippet bd-code-snippet"><div class="bd-example m-0 border-0">
+  <p class="display-5 mt-3 nome">${nota.nome}</p>
+  </div>
+  <div class="bd-example m-0 border-0 ms-1">
+    <p class="lead nota">
+      ${nota.nota}
+    </p>
+    </div>
+
+</div>
+</div>

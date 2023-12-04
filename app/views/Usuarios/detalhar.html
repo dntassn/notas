@@ -1,0 +1,53 @@
+#{extends 'main.html' /}
+
+
+
+
+
+
+<div class="container mt-3">
+
+  <a href="@{Notas.listar()}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+  </svg></a>
+  
+  </div>
+
+
+<div class="container mt-3">
+<div class="card">
+  <h5 class="card-header">#${usuario.id}</h5>
+  <div class="card-body">
+    <h5 class="card-title">${usuario.nome}</h5>
+    <p class="card-text">${usuario.email}</p>
+    <a href="@{Usuarios.editar(usuario.id)}" class="btn btn-primary">Editar</a>
+
+    <!-- Button trigger modal -->
+<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Apagar conta
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Apagar conta?</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        A ação não pode ser desfeita.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <a href="@{Usuarios.remover(usuario.id)}"  type="button" class="btn btn-danger">Apagar conta</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+  </div>
+</div>
+</div>

@@ -1,0 +1,97 @@
+#{extends 'main.html' /}
+
+<style>
+  a{
+    text-decoration: none;
+  }
+  a{
+    text-decoration: none;
+}
+.notaNome {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden; 
+  width: 60vw;
+}
+
+.notaNota {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden; 
+  width: 60vw;
+}
+@media only screen and (max-device-width: 991px) {
+	.notaNome {
+  width: 50vw;
+}
+
+.notaNota {
+  width: 50vw;
+}
+
+}
+@media only screen and (max-device-width: 767px) {
+	.notaNome {
+  width: 40vw;
+}
+.notaNota {
+  width: 40vw;
+}
+}
+@media only screen and (max-device-width: 680px) {
+	.notaNome {
+  width: 50vw;
+}
+
+.notaNota {
+  width: 50vw;
+}
+}
+
+
+
+@media only screen and (max-device-width: 373px) {
+	.nomePasta{
+		display: none;
+	}
+}
+</style>
+
+<div class="container mt-3">
+
+<a href="@{Notas.listar()}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+</svg></a>
+
+
+<div class="container mt-3">
+	<ol class="list-group list-group-numbered">
+		
+		#{list items:notas, as:'n'}
+		<a href="@{Notas.detalharLixeira(n.id)}">
+				<li class="list-group-item d-flex justify-content-between align-items-start">
+					<div class="ms-2 me-auto">
+					<div class="fw-bold notaNome">${n.nome}</div>
+					<div class="notaNota">${n.nota}</div>
+					</div>
+					<span class="badge bg-primary rounded-pill nomePasta">${n.pasta?.nome}</span>
+				</li>
+		</a>
+		#{/list}
+		#{else}
+		<li class="list-group-item d-flex justify-content-between align-items-start">
+			<div class="ms-2 me-auto">
+			<div class="fw-bold">Nenhuma nota</div>
+			</div>
+		</li>
+		#{/else}
+	  </ol>
+	  </div>
+
+
+</div>
+
+
+
+
+</div>

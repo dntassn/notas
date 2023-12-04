@@ -1,0 +1,170 @@
+#{extends 'main.html' /}
+#{set title:'Listagem de notas' /}
+<style>
+	a{
+    text-decoration: none;
+}
+.notaNome {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden; 
+  width: 60vw;
+}
+
+.notaNota {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden; 
+  width: 60vw;
+}
+@media only screen and (max-device-width: 991px) {
+	.notaNome {
+  width: 50vw;
+}
+
+.notaNota {
+  width: 50vw;
+}
+
+}
+@media only screen and (max-device-width: 767px) {
+	.notaNome {
+  width: 40vw;
+}
+.notaNota {
+  width: 40vw;
+}
+}
+@media only screen and (max-device-width: 680px) {
+	.notaNome {
+  width: 50vw;
+}
+
+.notaNota {
+  width: 50vw;
+}
+}
+
+
+
+@media only screen and (max-device-width: 373px) {
+	.nomePasta{
+		display: none;
+	}
+}
+</style>
+#{if session.get("usuarioLogado")}
+		<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+			<div class="container-fluid">
+			  <a class="navbar-brand" href="@{Notas.listar}">Notas</a>
+			  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			  </button>
+			  <div class="collapse navbar-collapse" id="navbarCollapse">
+				<ul class="navbar-nav me-auto mb-2 mb-md-0">
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+						  Criar
+						</a>
+						<ul class="dropdown-menu">
+						  <li><a class="dropdown-item" href="@{Notas.form}">Nova nota</a></li>
+						  <li><a class="dropdown-item" href="@{Pastas.form}">Nova pasta</a></li>
+						</ul>
+					  </li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+						  Pastas
+						</a>
+						<ul class="dropdown-menu">
+							#{list items:pastas, as:'p'}
+							<li class="list-group-item">
+								<a class="dropdown-item">
+
+	<form action="@{Notas.listar}">
+										<input class="searchInput" type="hidden" name="search" value="${p.id}">	
+										<button class="btn" type="submit" value="${p.nome}">${p.nome}</button>
+								</form>
+
+								</a>
+								
+							</li>
+							#{/list}
+							#{else}
+								<li><a class="dropdown-item">Nenhuma pasta</a></li>
+
+							#{/else}
+
+						</ul>
+					  </li>
+				</ul>
+				<div class="collapse navbar-collapse" id="navbarCollapse">
+					<ul class="navbar-nav me-auto mb-2 mb-md-0">
+				
+				  </ul>
+					#{if session['usuarioLogado']}
+					<div class="collapse navbar-collapse" id="navbarCollapse">
+						<ul class="navbar-nav me-auto mb-2 mb-md-0">
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+						  Conta
+						</a>
+						<ul class="dropdown-menu">
+						  <li><a class="dropdown-item" href="@{Usuarios.detalhar(session['usuarioLogadoId'])}">Opções</a></li>
+						  <li><a class="dropdown-item" href="@{Logins.logout()}">Log out</a></li>
+						</ul>
+					  </li>
+					  <li class="nav-item">
+						<a class="nav-link active" aria-current="page" href="@{Notas.publicas()}">Público</a>
+					  </li>
+					  <li class="nav-item">
+						<a class="nav-link active" aria-current="page" href="@{Notas.lixeira()}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+							<path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
+							<path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
+						  </svg></a>
+					  </li>
+					  </ul>
+				#{/if}
+				
+		  </div>
+		  
+			  </div>
+			  
+			</div>
+			</div>
+			<div class="collapse navbar-collapse me-3" id="navbarSupportedContent">
+				<form class="d-flex" role="search" action="@{Notas.publicas}">
+				  <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search" name="search">
+				  <button class="btn btn-outline-success" type="submit" value="search">Search</button>
+				</form>
+			  </div>
+		  </nav>
+			  
+		#{/if}
+		
+
+
+
+		  <div class="container mt-3">
+		<ol class="list-group list-group-numbered">
+			
+			#{list items:notas, as:'n'}
+				<a href="@{Notas.detalhar(n.id)}">
+					<li class="list-group-item d-flex justify-content-between align-items-start">
+						<div class="ms-2 me-auto">
+						<div class="fw-bold notaNome">${n.nome}</div>
+						<div class="notaNota">${n.nota}</div>
+						</div>
+						<span class="badge bg-primary rounded-pill nomePasta">${n.pasta?.nome}</span>
+					</li>
+				</a>
+			#{/list}
+			#{else}
+			<li class="list-group-item d-flex justify-content-between align-items-start">
+				<div class="ms-2 me-auto">
+				<div class="fw-bold">Nenhuma nota</div>
+				</div>
+			</li>
+			#{/else}
+		  </ol>
+		  </div>
+ 

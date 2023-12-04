@@ -1,0 +1,57 @@
+#{extends 'main.html' /}
+#{extends 'main.html' /}
+<style>
+  a{
+    text-decoration: none;
+  }
+  .nota{
+    text-align: justify;
+  }
+</style>
+
+<div class="container mt-3">
+
+<a href="@{Notas.listar()}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+</svg></a>
+
+</div>
+	
+</form >
+<div class="container mt-3">
+<form action="@{Notas.salvar}" method="POST" class="row g-3">
+	<div class="col-md-6">
+		<input type="hidden" name="n.id" value="${n?.id}" />
+	  <label for="inputEmail4" class="form-label">Nome</label>
+	  <input type="text" maxlength="45" required name="n.nome" value="${n?.nome}" class="form-control" id="inputEmail4"/>
+	</div>
+	<div class="col-12">
+	  <label for="inputAddress" class="form-label">Nota</label>
+	  <input maxlength="250" type="text" class="form-control" id="inputAddress" name="n.nota" value="${n?.nota}">
+	</div>
+
+		
+		<select hidden ="form-select" name="n.usuario.id">
+		  #{list items:usuarios, as:'p'}
+		  <option selected>${session['usuarioLogadoId']}</option>	
+		  #{/list}
+		</select>
+
+
+
+
+
+
+	<div class="col-md-4">
+	  <label for="inputState" class="form-label">Pasta</label>
+	  <select id="inputState" class="form-select" name="n.pasta.id">
+		#{list items:pastas, as:'p'}
+		  	<option ${flash['n.pasta.id'] == p.id.toString() ? 'selected':''} value="${p?.id}">${p.nome}</option>
+		  #{/list}
+	  </select>
+	</div>
+	<div class="col-12">
+	  <button type="submit" class="btn btn-primary">Salvar</button>
+	</div>
+  </form>
+</div>
